@@ -1,10 +1,10 @@
 target
 target/*
-alfresco/target/
-amp/target/
-runner/target/
-share/target/
-solr/target/
+alfresco/target
+amp/target
+runner/target
+share/target
+solr/target
 .settings
 .settings/*
 *.swp
