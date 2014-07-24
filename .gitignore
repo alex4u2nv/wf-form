@@ -1,0 +1,7 @@
+target
+target/*
+.settings
+.settings/*
+*.swp
+.DS_Store
+.DS_Store/*
