@@ -1,0 +1,5 @@
+<webscript>
+  <shortname>start-workflow</shortname>
+  <description>Displays a form to start a workflow</description>
+  <url>/consulting/extensions/components/workflow/start-workflow</url>
+</webscript>

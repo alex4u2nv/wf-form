@@ -10,3 +10,5 @@ solr/target
 *.swp
 .DS_Store
 .DS_Store/*
+alf_data
+solr_home

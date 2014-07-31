@@ -18,17 +18,19 @@
 	
 -->
 <beans>
-    
-    <!-- A simple class that is initialized by Spring -->
-    <bean id="changeMe.exampleBean" class="org.alfresco.demoamp.Demo" init-method="init" />
-    
-    <!-- A simple module component that will be executed once -->
-    <bean id="changeMe.exampleComponent" class="org.alfresco.demoamp.DemoComponent" parent="module.baseComponent" >
-        <property name="moduleId" value="${project.artifactId}" />  <!-- See module.properties -->
-        <property name="name" value="exampleComponent" />
-        <property name="description" value="A demonstration component" />
-        <property name="sinceVersion" value="2.0" />
-        <property name="appliesFromVersion" value="2.0" />
-    </bean>
+  <bean id="rmdir"  class="org.alfresco.consulting.actions.RemoveFolderExecuter" >
+  		<property name="fileFolderService" ref="fileFolderService" />
+  		<property name="nodeService" ref="nodeService" />
+  </bean>
+  
+  <bean id="workflowUploadInitializer" class="org.alfresco.consulting.services.workflow.InitializeWorkflow">
+  	<property name="actionService" ref="actionService" />
+  	<property name="fileFolderService" ref="fileFolderService" />
+  	<property name="ruleService" ref="ruleService" />
+  	<property name="nodeService" ref="nodeService" />
+  	<property name="searchService" ref="searchService" />
+  	<property name="transactionService" ref="transactionService" />
+  
+  </bean>
     
 </beans>

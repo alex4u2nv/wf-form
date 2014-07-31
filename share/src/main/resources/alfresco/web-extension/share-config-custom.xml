@@ -1,0 +1,23 @@
+<alfresco-config>
+	<config evaluator="string-compare" condition="activiti$activitiAdhoc">
+		<forms>
+			<form>
+				
+				<appearance>
+					<field id="packageItems">
+						<control >
+							<control-param name="allowUpload">true</control-param>
+						</control>
+					</field>
+				</appearance>
+
+			</form>
+
+		</forms>
+
+	</config>
+
+
+
+
+</alfresco-config>

@@ -1,0 +1,37 @@
+<extension>
+	<modules>
+		<module>
+			<id>Workflow Upload Form</id>
+			<auto-deploy>true</auto-deploy>
+			<version>1.2</version>
+			<components>
+				<component>
+					<scope>template</scope>
+					<region-id>start-workflow</region-id>
+					<source-id>start-workflow</source-id>
+					<sub-components>
+
+						<sub-component id="html-upload" index="71">
+							<url>/components/upload/html-upload</url>
+						</sub-component>
+						<sub-component id="flash-upload" index="72">
+							<url>/components/upload/flash-upload</url>
+						</sub-component>
+						<sub-component id="file-upload" index="73">
+							<url>/components/upload/file-upload</url>
+						</sub-component>
+						<sub-component id="dnd-upload" index="74">
+							<url>/components/upload/dnd-upload</url>
+						</sub-component>
+
+						<sub-component id="workflow-upload-extension" index="75">
+							<url>/consulting/extensions/components/workflow/start-workflow
+							</url>
+						</sub-component>
+					</sub-components>
+				</component>
+			</components>
+
+		</module>
+	</modules>
+</extension>
