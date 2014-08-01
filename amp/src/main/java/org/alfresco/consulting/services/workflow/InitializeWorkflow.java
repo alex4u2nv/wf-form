@@ -33,7 +33,7 @@ import org.alfresco.service.cmr.action.ActionCondition;
 import org.alfresco.service.cmr.action.CompositeAction;
 /**
  * Initialize rules to handle cleanup up Shared/workflow upload folder.
- * @author alexmahabir
+ * @author Alexander Mahabir
  *
  */
 public class InitializeWorkflow extends AbstractLifecycleBean {

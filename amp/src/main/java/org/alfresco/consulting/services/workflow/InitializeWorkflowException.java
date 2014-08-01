@@ -1,7 +1,11 @@
 package org.alfresco.consulting.services.workflow;
 
 import org.alfresco.error.AlfrescoRuntimeException;
-
+/**
+ * 
+ * @author Alexander Mahabir
+ *
+ */
 public class InitializeWorkflowException extends AlfrescoRuntimeException {
 
 	public InitializeWorkflowException(String msgId, Object[] msgParams,

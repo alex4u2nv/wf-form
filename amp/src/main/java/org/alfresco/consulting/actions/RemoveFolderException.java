@@ -1,7 +1,11 @@
 package org.alfresco.consulting.actions;
 
 import org.alfresco.error.AlfrescoRuntimeException;
-
+/**
+ * 
+ * @author Alexander Mahabir
+ *
+ */
 public class RemoveFolderException extends AlfrescoRuntimeException{
 
 	public RemoveFolderException(String msgId, Object[] msgParams,
