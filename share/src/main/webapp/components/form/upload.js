@@ -77,11 +77,11 @@ require(["dojo/ready"], function(ready){
               il = records.length;
               var obj = {
             		  item : {
-            			description: "Newly Upload CAR File"
-            			,displayPath: "/Company Home/tmp"
+            			description: "Newly Upload Workflow File"
+            			,displayPath: "/Shared/Workflow/Uploads"
             			,isContainer: false
             			,modified: new Date()
-            			,modifier: "mjackson"
+            			,modifier:  Alfresco.constants.USERNAME
             			,name: complete.successful[0].fileName
             			,nodeRef: complete.successful[0].nodeRef
             			,parentType: "cm:cmobject"
