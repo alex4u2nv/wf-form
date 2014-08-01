@@ -38,9 +38,9 @@ import org.alfresco.service.cmr.action.CompositeAction;
  */
 public class InitializeWorkflow extends AbstractLifecycleBean {
 	Logger logger = Logger.getLogger(InitializeWorkflow.class);
-	final StoreRef STORE_REF = new StoreRef(StoreRef.PROTOCOL_WORKSPACE, "SpacesStore");
-	final boolean REQUIRED=true;
-	final boolean NOT_REQUIRED=false;
+	final static StoreRef STORE_REF = new StoreRef(StoreRef.PROTOCOL_WORKSPACE, "SpacesStore");
+	final static boolean REQUIRED=true;
+	final static boolean NOT_REQUIRED=false;
 	private TransactionService transactionService;
 	private NodeService nodeService;
 	private RuleService ruleService;
@@ -49,8 +49,9 @@ public class InitializeWorkflow extends AbstractLifecycleBean {
 	private SearchService searchService;
 	@Override
 	protected void onBootstrap(ApplicationEvent event) {
+		logger.info("Initializing Workflow");
 		setup();
-		
+		logger.debug("Initializing Workflow Complete");
 	}
 
 	@Override
@@ -64,14 +65,17 @@ public class InitializeWorkflow extends AbstractLifecycleBean {
 	 */
 	private void initialize() throws Exception {
 		NodeRef sharedFolder = getSharedFolder();
+		
 		if (sharedFolder== null)
 			throw new InitializeWorkflowException("Unable to initialize Workflow Upload Module");
-		
+		logger.debug("Shared Folder: " + sharedFolder);
 		NodeRef uploadFolder = getUploadFolder();
 		
+		logger.debug("upload Folder: " + uploadFolder);
 		if (uploadFolder==null){ //If upload folder exists, then the system may have already been initialized.
-			uploadFolder = mkdir(sharedFolder, "Workflow/Uploads",REQUIRED);
-			NodeRef uploadTpl = mkdir(getTemplateFolder(), "temp-upload", REQUIRED);
+			uploadFolder = mkdir(sharedFolder, "Workflow/Uploads/",REQUIRED);
+			cleanupTplFolderIfExist();
+			NodeRef uploadTpl = mkdir(getTemplateFolder(), "temp-upload/", REQUIRED);
 			setMainRule(uploadTpl);
 		}	
 	}
@@ -80,27 +84,19 @@ public class InitializeWorkflow extends AbstractLifecycleBean {
 	 * @param uploadRef
 	 */
 	private void setMainRule(NodeRef uploadRef) { 
+		logger.debug("Setting Rules");
 		Rule rule = new Rule();
 		//create and set rules.
 		final String RULE_TITLE = "Workflow Upload Directory Template";
+		final String RULE_DESCRIPTION="This rule is executed whenever an item leaves the associated directory.\nWhen the directory becomes empty, it will be automatically deleted.";
 		rule.setTitle(RULE_TITLE);
+		rule.setDescription(RULE_DESCRIPTION);
 		rule.setExecuteAsynchronously(true);
 		rule.applyToChildren(false);
 		rule.setRuleDisabled(false);
 		rule.setRuleType(RuleType.OUTBOUND);
 		CompositeAction compositeAction = actionService.createCompositeAction();
-		rule.setAction(compositeAction);
-
-		//create and set action conditions.
-		ActionCondition actionCondition = actionService
-				.createActionCondition(IsSubTypeEvaluator.NAME);
-
-		Map<String, Serializable> conditionParameters = new HashMap<String, Serializable>(
-				1);
-		conditionParameters.put(IsSubTypeEvaluator.PARAM_TYPE,
-				ContentModel.TYPE_CONTENT); //setting subtypes to FOLDER
-		actionCondition.setParameterValues(conditionParameters);
-		compositeAction.addActionCondition(actionCondition);
+		
 		
 		//create and set action proprties.
 		Action action = actionService.createAction(RemoveFolderExecuter.NAME);
@@ -109,10 +105,11 @@ public class InitializeWorkflow extends AbstractLifecycleBean {
 		Map<String, Serializable> actionPropsMap = compositeAction.getParameterValues();
 		actionPropsMap.put(RemoveFolderExecuter.PARAM_FORCE_DELETION, false);
 		actionPropsMap.put(RemoveFolderExecuter.PARAM_THROW_EXCEPTION_ON_FAILURE, false);
-		actionPropsMap.put(RemoveFolderExecuter.PARAM_EXCEPTION_LIST, uploadRef);
+		actionPropsMap.put(RemoveFolderExecuter.PARAM_EXCEPTION_LIST, uploadRef.toString());
 		action.setParameterValues(actionPropsMap);
 		
 		compositeAction.addAction(action);
+		rule.setAction(compositeAction);
 		ruleService.saveRule(uploadRef, rule);
 
 	}
@@ -135,6 +132,15 @@ public class InitializeWorkflow extends AbstractLifecycleBean {
 		return getFolder(PATH,REQUIRED);
 	}
 	
+	private void cleanupTplFolderIfExist() {
+		final String PATH = "/app:company_home/app:dictionary/app:space_templates/cm:temp-upload";
+		
+		NodeRef nodeRef = getFolder(PATH);
+		if (nodeRef!=null){
+			logger.debug("templateNodeExists. Attempting to delete.");
+			nodeService.deleteNode(nodeRef);
+		}
+	}
 	/**
 	 * 
 	 * @param xpath -- xpath of folder to find.
@@ -151,6 +157,7 @@ public class InitializeWorkflow extends AbstractLifecycleBean {
 	 * @return
 	 */
 	private NodeRef getFolder(final String xpath, final boolean required) {
+		logger.debug("Finding Folder: " + xpath);
 		ResultSet resultSet = this.searchService.query(STORE_REF, SearchService.LANGUAGE_XPATH,xpath );
 		
 		try {
@@ -197,8 +204,14 @@ public class InitializeWorkflow extends AbstractLifecycleBean {
 	 * @return
 	 */
 	public NodeRef mkdir(final NodeRef parent,final String path, final boolean required) {
-		List<String> pathElements = Arrays.asList(path.split(""));
+		List<String> pathElements = Arrays.asList(path.split("/"));
 		
+		if (logger.isDebugEnabled()) {
+			logger.debug("Mkdir: " + path);
+			for (String string : pathElements) {
+				logger.debug("path token: " + string);
+			}
+		}
 		FileInfo fileInfo = FileFolderUtil.makeFolders(fileFolderService,
 				parent, pathElements, ContentModel.TYPE_FOLDER);
 		
@@ -223,7 +236,7 @@ public class InitializeWorkflow extends AbstractLifecycleBean {
 			@Override
 			public Object execute() throws Throwable {
 				 
-				
+				logger.debug("Initializing In Retrying Transaction");
 				initialize();
 				
 				return null;

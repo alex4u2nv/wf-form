@@ -30,7 +30,7 @@
         <!-- Demonstrating the dependency on the repo AMP developed in the 'amp' module -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>amp</artifactId>
+            <artifactId>workflow-upload</artifactId>
             <version>${project.version}</version>
             <type>amp</type>
         </dependency>
@@ -68,7 +68,7 @@
                         <!-- Add / order your AMPs here -->
                         <overlay>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>amp</artifactId>
+                            <artifactId>workflow-upload</artifactId>
                             <type>amp</type>
                         </overlay>
                         <overlay>

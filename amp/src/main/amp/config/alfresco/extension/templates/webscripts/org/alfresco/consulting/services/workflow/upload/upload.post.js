@@ -16,6 +16,13 @@ function exitUpload(statusCode, statusMsg)
    status.message = statusMsg;
    status.redirect = true;
 }
+/**
+ * Generate a unique name for saving the folder into shared directory.
+ * @returns
+ */
+function generateUniqueName() {
+	return person.properties.userName+"-"+utils.toISO8601(new Date()).replace(".","_").replace(":","_").replace("T", " ");
+}
 
 function main()
 {
@@ -145,9 +152,7 @@ function main()
           */
     	  destNode = search.findNode("path", ["workspace", "SpacesStore", "Company Home", "Shared", "Workflow", "Uploads"]);
           var tplNode = search.findNode("path", ["workspace", "SpacesStore", "Company Home", "Data Dictionary", "Space Templates", "temp-upload"]);
-    	  
-          
-          
+    	 
          if (destNode === null)
          {
             exitUpload(404, "Destination (" + destination + ") not found.");
@@ -156,9 +161,9 @@ function main()
          if (tplNode===null) {
         	 exitUpload(404, "Template Node does not exist");
          }
-         var tmpFolder = person.properties.userName+"-"+utils.toISO8601(new Date()).replace(".","_").replace(":","_");
+         
          destNode=tplNode.copy(destNode);
-         destNode.name=tplFolder;
+         destNode.name=generateUniqueName();
          
 
      
@@ -226,7 +231,8 @@ function main()
       else
       {
          e.code = 500;
-         e.message = "Unexpected error occurred during upload of new content.";      
+         e.message = "Unexpected error occurred during upload of new content.";    
+         
       }
       throw e;
    }

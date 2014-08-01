@@ -5,7 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/properties/local"/>
-        <dependent-module archiveName="amp-1.0-SNAPSHOT.amp" deploy-path="/WEB-INF/lib" handle="module:/resource/amp/amp">
+        <dependent-module archiveName="workflow-upload-1.0-SNAPSHOT.amp" deploy-path="/WEB-INF/lib" handle="module:/resource/amp/amp">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module deploy-path="/" handle="module:/overlay/var/M2_REPO/org/alfresco/alfresco-spp/4.2.2/alfresco-spp-4.2.2.amp?unpackFolder=target/m2e-wtp/overlays&amp;includes=**/**&amp;excludes=META-INF/MANIFEST.MF">

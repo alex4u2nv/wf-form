@@ -18,9 +18,10 @@
 	
 -->
 <beans>
-  <bean id="rmdir"  class="org.alfresco.consulting.actions.RemoveFolderExecuter" >
+  <bean id="rmdir"  class="org.alfresco.consulting.actions.RemoveFolderExecuter" parent="action-executer">
   		<property name="fileFolderService" ref="fileFolderService" />
   		<property name="nodeService" ref="nodeService" />
+  		<property name="ruleService" ref="ruleService" />
   </bean>
   
   <bean id="workflowUploadInitializer" class="org.alfresco.consulting.services.workflow.InitializeWorkflow">
