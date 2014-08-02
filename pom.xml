@@ -19,19 +19,33 @@
        | For more available properties see the alfresco-sdk-parent POM. 
        -->
     <properties>
-        <!-- 
-            | Defines the Alfresco GroupId \ Edition to work against. Allowed values are: org.alfresco | org.alfresco.enterprise
-            | NOTE: Please Refer to Alfresco Support for access to Enterprise artifacts -->
-        <alfresco.groupId>org.alfresco</alfresco.groupId>
-        <!-- Defines the Alfresco version to work against. Allowed values are: org.alfresco | org.alfresco.enterprise -->
-        <alfresco.version>4.2.2</alfresco.version>
-        <!-- This control the root logging level for all apps -->
-        <app.log.root.level>WARN</app.log.root.level>
-        <!-- This controls the default data location for dir.root -->
-        <alfresco.data.location>alf_data_dev</alfresco.data.location>
-        <!-- This controls which properties will be picked in multi-enviromment build -->
-        <env>local</env>
-    </properties>
+	<!-- | Defines the Alfresco GroupId \ Edition to work against. Allowed values 
+		are: org.alfresco | org.alfresco.enterprise | NOTE: Please Refer to Alfresco 
+		Support for access to Enterprise artifacts -->
+	<alfresco.groupId>org.alfresco</alfresco.groupId>
+	<!-- Defines the Alfresco version to work against. Allowed values are: org.alfresco 
+		| org.alfresco.enterprise -->
+	<alfresco.version>4.2.2</alfresco.version>
+	<!-- This control the root logging level for all apps -->
+	<app.log.root.level>WARN</app.log.root.level>
+	<!-- This controls the default data location for dir.root -->
+	<alfresco.data.location>alf_data_dev</alfresco.data.location>
+	<!-- This controls which properties will be picked in multi-enviromment 
+		build -->
+	<env>local</env>
+	<dependency.lucene.version>2.4.1</dependency.lucene.version>
+	<dependency.jibx.version>1.2.5</dependency.jibx.version>
+	<dependency.tika.version>1.5-20130720-alfresco-patched</dependency.tika.version>
+	<dependency.vorbisJava.version>0.3-20130206</dependency.vorbisJava.version>
+	<dependency.opencmis.version>0.10.0</dependency.opencmis.version>
+	<dependency.antlr.version>3.4</dependency.antlr.version>
+	<dependency.junit.version>4.11</dependency.junit.version>
+	<dependency.spring.version>3.0.5.RELEASE</dependency.spring.version>
+	<dependency.surf.version>1.2.0-M18</dependency.surf.version>
+	<dependency.activiti.version>5.13-alf-20140107</dependency.activiti.version>
+	<dependency.poi.version>3.10-beta2-20130720</dependency.poi.version>
+	<dependency.dojo.version>1.8.3</dependency.dojo.version>
+</properties>
 
    <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->
    <dependencyManagement>

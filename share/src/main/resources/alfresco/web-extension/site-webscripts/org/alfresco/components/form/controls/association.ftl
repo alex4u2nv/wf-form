@@ -43,7 +43,7 @@ var _workflowPicker=null;
 //]]</script>
 
 </#if>
-<div class="form-field stocorp-form-field">
+<div class="form-field">
    <#if form.mode == "view">
       <div id="${controlId}" class="viewmode-field">
          <#if (field.endpointMandatory!false || field.mandatory!false) && field.value == "">
@@ -68,15 +68,14 @@ var _workflowPicker=null;
             <@renderPickerHTML controlId />
          </#if>
       </div>
-      <#if  field.control.params.allowUpload?? && field.control.params.allowUpload == "true" >
+      <#if  field.control.params.allowUpload?? && field.control.params.allowUpload == "true"  && field.disabled == false>
       
-<span class="yui-button yui-push-button" id="${args.htmlid?html}-button-span" style="position:relative; top:-43px; left: 147px;">
-   <span class="first-child"><button data-dojo-type="dijit.form.Button" id="${args.htmlid?html}-uploadusers-button" onclick="wfaUpload.onUpload(event);">Upload</button></span>
-</span>
+	<span class="yui-button yui-push-button" id="${args.htmlid?html}-button-span" style="position:relative; top:-43px; left: 147px;">
+	   <span class="first-child"><button data-dojo-type="dijit.form.Button" id="${args.htmlid?html}-uploadusers-button" onclick="wfaUpload.onUpload(event);">Upload</button></span>
+	</span>
 		
       </#if>
    </#if>
 </div>
-
 
 

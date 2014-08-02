@@ -12,15 +12,21 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <dependencies>
-        <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>share</artifactId>
-            <type>war</type>
-        </dependency>
-        <!-- Here you can add your Share AMP dependencies -->
-       
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>${alfresco.groupId}</groupId>
+			<artifactId>share</artifactId>
+			<type>war</type>
+		</dependency>
+		<!-- Here you can add your Share AMP dependencies -->
+		<!-- Used for Developing Custom Evaluator -->
+		<dependency>
+			<groupId>org.springframework.extensions.surf</groupId>
+			<artifactId>spring-surf-api</artifactId>
+			<version>${dependency.surf.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
     <build>
         <plugins>
             <plugin>

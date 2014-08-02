@@ -1,5 +1,10 @@
 <alfresco-config>
-	<config evaluator="string-compare" condition="activiti$activitiAdhoc">
+	<plug-ins>
+		<evaluators>
+			<evaluator id="string-regex" class="org.alfresco.consulting.evaluators.StringRegexEvaluator" />
+		</evaluators>
+	</plug-ins>
+	<config evaluator="string-regex" condition="activiti.*">
 		<forms>
 			<form>
 				
@@ -16,8 +21,4 @@
 		</forms>
 
 	</config>
-
-
-
-
 </alfresco-config>
