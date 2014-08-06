@@ -158,7 +158,7 @@ public class InitializeWorkflow extends AbstractLifecycleBean {
 	 */
 	private NodeRef getFolder(final String xpath, final boolean required) {
 		logger.debug("Finding Folder: " + xpath);
-		ResultSet resultSet = this.searchService.query(STORE_REF, SearchService.LANGUAGE_XPATH,xpath );
+		ResultSet resultSet = this.searchService.query(STORE_REF, SearchService.LANGUAGE_LUCENE, "PATH:"+xpath );
 		
 		try {
 			if (resultSet.length()!=0) {
