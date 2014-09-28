@@ -1,16 +1,17 @@
 <alfresco-config>
 	<plug-ins>
 		<evaluators>
-			<evaluator id="string-regex" class="org.alfresco.consulting.evaluators.StringRegexEvaluator" />
+			<evaluator id="string-regex"
+				class="org.alfresco.consulting.evaluators.StringRegexEvaluator" />
 		</evaluators>
 	</plug-ins>
 	<config evaluator="string-regex" condition="activiti.*">
 		<forms>
 			<form>
-				
+
 				<appearance>
 					<field id="packageItems">
-						<control >
+						<control>
 							<control-param name="allowUpload">true</control-param>
 						</control>
 					</field>

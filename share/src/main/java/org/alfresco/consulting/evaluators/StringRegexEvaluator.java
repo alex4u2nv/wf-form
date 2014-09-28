@@ -2,11 +2,6 @@ package org.alfresco.consulting.evaluators;
 
 import org.springframework.extensions.config.evaluator.Evaluator;
 
-/**
- * Regex based Evaluator
- * @author Alexander Mahabir
- *
- */
 public class StringRegexEvaluator implements Evaluator {
 	
 	@Override
